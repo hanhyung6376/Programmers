@@ -12,8 +12,6 @@ def solution(n, s, a, b, fares):
             answer = graph[s][i] + graph[i][a] + graph[i][b]
 
     answer = min(answer, graph[s][a] + graph[a][b], graph[s][b] + graph[b][a])
-
-
     return answer
 
 
