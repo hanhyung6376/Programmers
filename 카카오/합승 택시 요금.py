@@ -18,8 +18,6 @@ def solution(n, s, a, b, fares):
 
 
 def floyd_warshall(graph):
-    inf = float('inf')
-
     for k in range(1, len(graph)):
         for i in range(1, len(graph)):
             for j in range(1, len(graph)):
