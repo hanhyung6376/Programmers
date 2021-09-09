@@ -1,31 +1,29 @@
 from itertools import permutations
 
-
-def check(users, banned_id):
-    for i in range(len(banned_id)):
-        if len(users[i]) != len(banned_id[i]):
-            return False
-
-        for j in range(len(users[i])):
-            if banned_id[i][j] == "*":
-                continue
-            if banned_id[i][j] != users[i][j]:
-                return False  # 현재 튜플 불일치
-
-    return True
-
-
 def solution(user_id, banned_id):
-    user_permutation = list(permutations(user_id, len(banned_id)))
-    banned_Set = []
+    answer = 0
+    user_id.sort
+    banned_id.sort
+    arr = list(permutations(user_id, len(banned_id)))
+    result = []
 
-    for users in user_permutation:
-        # 하나의 튜플과 비교 시작
-        if not check(users, banned_id):
-            continue  # 다음 튜플 가져오기
-        else:
-            users = set(users)
-            if users not in banned_Set:
-                banned_Set.append(users)
+    for user_list in arr:
+        isTrue = True
+        for user, ban in zip(user_list, banned_id):
+            if len(user) != len(ban):
+                isTrue = False
+                break
+            for u, b in zip(user, ban):
+                if len(u) != len(b):
+                    isTrue = False
+                    break
+                elif b != '*' and u != b:
+                    isTrue = False
+                    break
+        # 중복 제거
+        if isTrue and sorted(user_list) not in result:
+            result.append(sorted(user_list))
 
-    return len(banned_Set)
+    answer = len(result)
+
+    return answer
