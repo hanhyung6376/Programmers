@@ -18,6 +18,7 @@ def solution(table, languages, preference):
             word = [job[0], answer]
             word.sort()
             answer = word[0]
-
     return answer
 
+
+solution(a)
